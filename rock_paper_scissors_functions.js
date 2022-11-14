@@ -1,9 +1,8 @@
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
     
-    playerSelection = prompt("Rock Paper or Scissors?").toLowerCase();
-
-    alert("Player: " + playerSelection + " Computer: " + computerSelection)
-    
+    document.getElementById('winnerInfo').textContent = "";
+    let computerSelection = getComputerChoice().toLowerCase(); 
+  
     let resultsString = "Sorry buddy you lose, don't quit your day job...";
     if(playerSelection === "rock" && computerSelection === "scissors"){
         resultsString = "YOU WIN HOLY COW!!!"
@@ -23,16 +22,33 @@ function playRound(playerSelection, computerSelection) {
         winCountComputer--;
 
     }
-
     if(resultsString == "Sorry buddy you lose, don't quit your day job..."){
-        winCountComputer++;
+      winCountComputer++;
     }
+    rounds++;
+
+    document.getElementById("gameInfo").textContent = "Player: " + playerSelection + " Computer: " + computerSelection + " Round: " + rounds; 
+    if(rounds === 5){    
+      if(winCountPlayer > winCountComputer){
+         document.getElementById("winnerInfo").textContent = "YOU WON WILL YOU GO TO DISNEYLAND NOW?!!!";
+        }
+      else{
+         document.getElementById("winnerInfo").textContent = "WOW YOU LOST TO A COMPUTER, I BET YOU FEEL BAD?!!!";
+        }
+        rounds = 0;
+      }
     
+    
+    
+    document.getElementById('roundInfo').textContent = resultsString + " Player Wins: " + winCountPlayer + " Computer Wins: " + winCountComputer;
    
-    alert(resultsString + " Player Wins: " + winCountPlayer + " Computer Wins: " + winCountComputer);
     
-    return resultsString;
+
+ 
   }
+
+    
+
 
 function getComputerChoice(){
      let randomNumber = Math.floor(Math.random() * 3);
@@ -49,25 +65,14 @@ function getComputerChoice(){
           break;
       }
 }
-  let rounds = 0;
   let winCountPlayer = 0;
   let winCountComputer = 0;
+  let rounds = 1;
 
-  const playerSelection = "";
-  
-  for(rounds = 1; rounds <= 5; rounds ++){
-  const computerSelection = getComputerChoice().toLowerCase();
-  console.log(playRound(playerSelection, computerSelection));  
-  alert("rounds: " + rounds);
-  if(rounds === 5){    
-    if(winCountPlayer > winCountComputer){
-        alert("YOU WON WILL YOU GO TO DISNEYLAND NOW?!!!");
-      }
-    else{
-        alert("WOW YOU LOST TO A COMPUTER, I BET YOU FEEL BAD?!!!");
-      }
-    }
-  }
+
+  document.getElementById("gameInfo").textContent = "Round: " + rounds; 
+
+
 
 
   
